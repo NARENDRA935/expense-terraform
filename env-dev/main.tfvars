@@ -1,6 +1,6 @@
 env="dev"
-vpc={
+vpc = {
   main={
-    vpc_cidr=10.10.0.0/21
+    vpc_cidr="10.10.0.0/21"
   }
 }
