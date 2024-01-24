@@ -6,10 +6,21 @@ resource "aws_vpc" "main" {
   }
 }
 
-resource "aws_subnet" "main" {
-  count = length(var.subnets_cidr)
+resource "aws_subnet" "public" {
+  count = length(var.public_subnets_cidr)
   vpc_id     = aws_vpc.main.id
-  cidr_block = element(var.subnets_cidr,count.index )
+  cidr_block = element(var.public_subnets_cidr,count.index )
+  availability_zone = element(var.az,count.index )
+
+  tags = {
+    Name = "subnet-${count.index}"
+  }
+}
+
+resource "aws_subnet" "private" {
+  count = length(var.private_subnets_cidr)
+  vpc_id     = aws_vpc.main.id
+  cidr_block = element(var.private_subnets_cidr,count.index )
   availability_zone = element(var.az,count.index )
 
   tags = {
@@ -74,6 +85,6 @@ resource "aws_security_group" "test" {
 resource "aws_instance" "test" {
   ami           = data.aws_ami.example.image_id
   instance_type = "t3.micro"
-  subnet_id = lookup(element(aws_subnet.main,0 ),"id",null )
+  subnet_id = lookup(element(aws_subnet.private,0 ),"id",null )
   vpc_security_group_ids = [aws_security_group.test.id]
 }
