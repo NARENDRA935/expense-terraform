@@ -46,14 +46,16 @@ resource "aws_autoscaling_group" "main" {
   min_size              = var.instance_capacity
   vpc_zone_identifier   = var.vpc_zone_identifier
 
-
   launch_template {
-    id          = aws_launch_template.main.id
-    version     = "$latest"
+    id      = aws_launch_template.main.id
+    version ="$latest"
   }
 
+
+
+
   tag {
-    key                 = "name"
+    key                 = "Name"
     value               = local.name
     propagate_at_launch = true
   }
