@@ -12,5 +12,5 @@ variable "rds_allocated_storage" {}
 variable "rds_db_name" {}
 variable "rds_engine" {}
 variable "rds_engine_version" {}
-variable "rds-instance_class" {}
+variable "rds_instance_class" {}
 variable "rds_family" {}
