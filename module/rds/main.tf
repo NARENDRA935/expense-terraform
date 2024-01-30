@@ -41,19 +41,19 @@ resource "aws_security_group" "main" {
 
 
 resource "aws_db_instance" "main" {
-  identifier           = "${var.env}-${var.project_name}-rds"
-  allocated_storage    = var.allocated_storage
-  db_name              = var.db_name
-  engine               = var.engine
-  engine_version       = var.engine_version
-  instance_class       = var.instance_class
-  username             = data.aws_ssm_parameter.username.value
-  password             = data.aws_ssm_parameter.password.value
-  parameter_group_name = aws_db_parameter_group.main.name
-  skip_final_snapshot  = true
-  storage_encrypted    = true
-  kms_key_id           = var.kms_key_id
-  db_subnet_group_name = aws_db_parameter_group.main.name
-  vpc_security_group_ids = [aws_security_group.main.id]
+  identifier              = "${var.env}-${var.project_name}-rds"
+  allocated_storage       = var.allocated_storage
+  db_name                 = var.db_name
+  engine                  = var.engine
+  engine_version          = var.engine_version
+  instance_class          = var.instance_class
+  username                = data.aws_ssm_parameter.username.value
+  password                = data.aws_ssm_parameter.password.value
+  parameter_group_name    = aws_db_parameter_group.main.name
+  skip_final_snapshot     = true
+  storage_encrypted       = true
+  kms_key_id              = var.kms_key_id
+  db_subnet_group_name    = aws_db_subnet_group.main.name
+  vpc_security_group_ids  = [aws_security_group.main.id]
 }
 
