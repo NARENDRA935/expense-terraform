@@ -14,8 +14,9 @@ module "vpc" {
 
 module "rds" {
   source = "./module/rds"
-  for_each = var.rds
+  for_each             = var.rds
 
+## varible of rds
   allocated_storage    = lookup(each.value,"allocated_storage",null)
   db_name              = lookup(each.value,"db_name",null)
   engine               = lookup(each.value,"engine",null)
@@ -23,5 +24,13 @@ module "rds" {
   instance_class       = lookup(each.value,"instance_class",null)
   family               = lookup(each.value,"family",null)
 
+ ##common varibles
+  env                 = var.env
+  project_name        = var.project_name
+  kms_key_id          = var.kms_key_id
 
+##other varibles like outputs
+  subnet_ids  = lookup(lookup(module.vpc,"main",null ), "db_subnet_ids",null)
+  vpc_id      = lookup(lookup(module.vpc,"main",null ), "vpc_id",null)
+  sg_cidr_blocks = lookup(lookup(var.vpc,"main",null ), "app_subnets_cidr",null)
 }
