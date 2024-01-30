@@ -58,7 +58,7 @@ module "rds" {
   db_name              = var.rds_db_name
   engine               = var.rds_engine
   engine_version       =var.rds_engine_version
-  instance_class       = var.rds-instance_class
+  instance_class       = var.rds_instance_class
   family               = var.rds_family
 
   ##common varibles
