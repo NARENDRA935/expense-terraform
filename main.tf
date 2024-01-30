@@ -36,6 +36,7 @@ module "rds" {
   sg_cidr_blocks = lookup(lookup(var.vpc,"main",null ), "app_subnets_cidr",null)
 }*/
 
+#network
 module "vpc" {
   source              = "./module/vpc"
   vpc_cidr            = var.vpc_cidr
@@ -49,6 +50,7 @@ module "vpc" {
   project_name        = var.project_name
 }
 
+#database
 module "rds" {
   source = "./module/rds"
 
@@ -70,4 +72,20 @@ module "rds" {
   subnet_ids  = module.vpc.app_subnets_ids
   vpc_id      = module.vpc.vpc_id
   sg_cidr_blocks = var.app_subnets_cidr
+}
+
+#application layer
+
+module "backend" {
+  source = "./module/app"
+
+  app_port          = var.backend_app_port
+  bastion_cidrs     = var.bastion_cidrs
+  component         = "backend"
+  env               = var.env
+  instance_capacity = var.backend_instance_capacity
+  instance_type     = var.backend_instance_type
+  project_name      = var.project_name
+  sg_cidr_blocks    = module.vpc.web_subnets_ids
+  vpc_id            = module.vpc.vpc_id
 }

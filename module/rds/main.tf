@@ -12,6 +12,8 @@ resource "aws_db_subnet_group" "main" {
     Name = "${var.env}-${var.project_name}-sg"
   }
 }
+
+
 resource "aws_security_group" "main" {
   name        = "${var.env}-${var.project_name}-rds-sg"
   description = "${var.env}-${var.project_name}-rds-sg"
