@@ -9,7 +9,7 @@ resource "aws_db_subnet_group" "main" {
   subnet_ids = var.subnet_ids
 
   tags = {
-    Name = "My DB subnet group"
+    Name = "${var.env}-${var.project_name}-sg"
   }
 }
 resource "aws_security_group" "main" {
