@@ -51,9 +51,6 @@ resource "aws_autoscaling_group" "main" {
     version ="$latest"
   }
 
-
-
-
   tag {
     key                 = "Name"
     value               = local.name
