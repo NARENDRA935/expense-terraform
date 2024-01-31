@@ -138,6 +138,7 @@ module "private-alb" {
   alb_name         = "private"
   internal         = true
   dns_name         = "backend"
+
   sg_cidr_blocks   = var.web_subnets_cidr
 
   subnets          = module.vpc.app_subnets_ids
