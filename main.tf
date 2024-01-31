@@ -86,7 +86,7 @@ module "backend" {
   instance_capacity   = var.backend_instance_capacity
   instance_type       = var.backend_instance_type
   project_name        = var.project_name
-  sg_cidr_blocks      = var.web_subnets_cidr #this needs to be checked
+  sg_cidr_blocks      = var.app_subnets_cidr #this needs to be checked
   vpc_id              = module.vpc.vpc_id
   vpc_zone_identifier = module.vpc.app_subnets_ids
 }
@@ -101,7 +101,7 @@ module "frontend" {
   instance_capacity   = var.frontend_instance_capacity
   instance_type       = var.frontend_instance_type
   project_name        = var.project_name
-  sg_cidr_blocks      = var.web_subnets_cidr #this needs to be checked
+  sg_cidr_blocks      = var.public_subnets_cidr #this needs to be checked
   vpc_id              = module.vpc.vpc_id
   vpc_zone_identifier = module.vpc.web_subnets_ids
 }
