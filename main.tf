@@ -118,7 +118,7 @@ module "public-alb" {
   sg_cidr_blocks   = ["0.0.0.0/0"]
 
   subnets = module.vpc.public_subnets_ids
-  vpc_id = module.vpc
+  vpc_id = module.vpc.vpc_id
 }
 
 #private_load_balancer
@@ -133,5 +133,5 @@ module "private-alb" {
   sg_cidr_blocks   = var.web_subnets_cidr
 
   subnets = module.vpc.app_subnets_ids
-  vpc_id = module.vpc
+  vpc_id = module.vpc.vpc_id
 }
