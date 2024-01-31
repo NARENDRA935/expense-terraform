@@ -113,13 +113,15 @@ module "public-alb" {
 
   env              = var.env
   project_name     = var.project_name
+  acm_arn          = var.acm_arn
 
   alb_name         = "public"
   internal         = false
   sg_cidr_blocks   = ["0.0.0.0/0"]
 
-  subnets = module.vpc.public_subnets_ids
-  vpc_id = module.vpc.vpc_id
+  subnets          = module.vpc.public_subnets_ids
+  vpc_id           = module.vpc.vpc_id
+  target_group_arn = module.frontend.target_group_arn
 }
 
 #private_load_balancer
@@ -128,11 +130,13 @@ module "private-alb" {
 
   env              = var.env
   project_name     = var.project_name
+  acm_arn          = var.acm_arn
 
   alb_name         = "private"
   internal         = true
   sg_cidr_blocks   = var.web_subnets_cidr
 
-  subnets = module.vpc.app_subnets_ids
-  vpc_id = module.vpc.vpc_id
+  subnets          = module.vpc.app_subnets_ids
+  vpc_id           = module.vpc.vpc_id
+  target_group_arn = module.backend.target_group_arn
 }

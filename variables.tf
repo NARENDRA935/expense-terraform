@@ -2,6 +2,7 @@ variable "env" {}
 variable "project_name" {}
 variable "kms_key_id" {}
 variable "bastion_cidrs" {}
+variable "acm_arn" {}
 
 variable "vpc_cidr" {}
 variable "public_subnets_cidr" {}

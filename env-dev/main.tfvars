@@ -2,6 +2,7 @@ env           = "dev"
 project_name  = "expense"
 kms_key_id    = "arn:aws:kms:us-east-1:495277360928:key/5226d7c2-e3f9-4f4d-af88-d9226f28105e"
 bastion_cidrs = ["172.31.34.116/32"]
+acm_arn       = "arn:aws:acm:us-east-1:495277360928:certificate/cf1210de-4c0b-4a56-853a-b2b3542e43e4"
 
 
 /*
