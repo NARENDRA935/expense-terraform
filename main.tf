@@ -114,9 +114,11 @@ module "public-alb" {
   env              = var.env
   project_name     = var.project_name
   acm_arn          = var.acm_arn
+  zone_id          = var.zone_id
 
   alb_name         = "public"
   internal         = false
+  dns_name         = "frontend"
   sg_cidr_blocks   = ["0.0.0.0/0"]
 
   subnets          = module.vpc.public_subnets_ids
@@ -131,9 +133,11 @@ module "private-alb" {
   env              = var.env
   project_name     = var.project_name
   acm_arn          = var.acm_arn
+  zone_id          = var.zone_id
 
   alb_name         = "private"
   internal         = true
+  dns_name         = "backend"
   sg_cidr_blocks   = var.web_subnets_cidr
 
   subnets          = module.vpc.app_subnets_ids

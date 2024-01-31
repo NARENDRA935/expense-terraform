@@ -3,6 +3,7 @@ variable "project_name" {}
 variable "kms_key_id" {}
 variable "bastion_cidrs" {}
 variable "acm_arn" {}
+variable "zone_id" {}
 
 variable "vpc_cidr" {}
 variable "public_subnets_cidr" {}
@@ -26,3 +27,4 @@ variable "backend_instance_type" {}
 variable "frontend_app_port" {}
 variable "frontend_instance_capacity" {}
 variable "frontend_instance_type" {}
+

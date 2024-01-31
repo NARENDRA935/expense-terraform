@@ -8,3 +8,5 @@ variable "vpc_id" {}
 variable "sg_cidr_blocks" {}
 variable "subnets" {}
 variable "target_group_arn" {}
+variable "zone_id" {}
+variable "dns_name" {}
