@@ -110,10 +110,11 @@ module "frontend" {
 module "public-alb" {
   source = "./module/alb"
 
-  alb_name         = "public"
+
   env              = var.env
   project_name     = var.project_name
 
+  alb_name         = "public"
   internal         = false
   sg_cidr_blocks   = ["0.0.0.0/0"]
 
