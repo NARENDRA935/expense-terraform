@@ -105,3 +105,33 @@ module "frontend" {
   vpc_id              = module.vpc.vpc_id
   vpc_zone_identifier = module.vpc.web_subnets_ids
 }
+
+#public load balancer
+module "public-alb" {
+  source = "./module/alb"
+
+  alb_name         = "public"
+  env              = var.env
+  project_name     = var.project_name
+
+  internal         = false
+  sg_cidr_blocks   = ["0.0.0.0/0"]
+
+  subnets = module.vpc.public_subnets_ids
+  vpc_id = module.vpc
+}
+
+#private_load_balancer
+module "private-alb" {
+  source = "./module/alb"
+
+  env              = var.env
+  project_name     = var.project_name
+
+  alb_name         = "private"
+  internal         = true
+  sg_cidr_blocks   = var.web_subnets_cidr
+
+  subnets = module.vpc.app_subnets_ids
+  vpc_id = module.vpc
+}
