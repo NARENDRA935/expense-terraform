@@ -120,7 +120,8 @@ resource "aws_iam_role" "main" {
             "ssm:GetParameters",
             "ssm:GetParameter"
           ],
-          "Resource": "arn:aws:ssm:us-east-1:495277360928:parameter/${var.env}.${var.project_name}.${var.component}.*"
+          "Resource": concat(["arn:aws:ssm:us-east-1:495277360928:parameter/${var.env}.${var.project_name}.${var.component}.*"
+          ], var.parameters)
 
         },
         {

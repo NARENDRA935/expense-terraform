@@ -8,3 +8,4 @@ variable "app_port" {}
 variable "sg_cidr_blocks" {}
 variable "instance_capacity" {}
 variable "vpc_zone_identifier" {}
+variable "parameters" {}
