@@ -110,10 +110,11 @@ resource "aws_iam_role" "main" {
             "ssm:GetParameters",
             "ssm:GetParameter"
           ],
-          "Resource": "arn:aws:ssm:us-east-1:495277360928:parameter/dev.expense.frontend.*"
+          "Resource": "arn:aws:ssm:us-east-1:495277360928:parameter/${var.env}.${var.project_name}.${var.component}.*"
+
         },
         {
-          "Sid": "DescribeAllParameters",
+          "Sid": "DescribeAllParameters"
           "Effect": "Allow",
           "Action": "ssm:DescribeParameters",
           "Resource": "*"
