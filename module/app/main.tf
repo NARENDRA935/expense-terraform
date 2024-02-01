@@ -37,11 +37,21 @@ resource "aws_security_group" "main" {
 
 
 resource "aws_launch_template" "main" {
-  name_prefix   = "${local.name}-lt"
-  image_id      = data.aws_ami.centos8.image_id
-  instance_type = var.instance_type
+  name_prefix            = "${local.name}-lt"
+  image_id               = data.aws_ami.centos8.image_id
+  instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.main.id]
+
+  user_data = base64encode(templatefile("${path.module}/userdata.sh", {
+    service_name = var.component
+    env          = var.env
+  }))
+
+  iam_instance_profile {
+    name = aws_iam_instance_profile.main.name
+  }
 }
+
 
 resource "aws_autoscaling_group" "main" {
   name               = "${local.name}-asg"
@@ -122,6 +132,11 @@ resource "aws_iam_role" "main" {
       ]
     })
   }
+}
+
+resource "aws_iam_instance_profile" "main" {
+  name = "${local.name}-rle"
+  role = aws_iam_role.main.name
 }
 
 
